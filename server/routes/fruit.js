@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 // telling my router that I have this model
-let Book = require('../model/book');
-const book = require('../model/book');
-let bookController = require('../controllers/book.js')
+let Fruit = require('../model/Fruit.js');
+const fruit = require('../model/Fruit.js');
+let fruitController = require('../controllers/fruit.js')
 /* Get route for the book list - Read Operation */
 /*
 GET,
@@ -14,14 +14,14 @@ Put --> Edit/Update
 /* Read Operation --> Get route for displaying the books list */
 router.get('/',async(req,res,next)=>{
 try{
-    const BookList = await Book.find();
-    res.render('Book/list',{
-        title:'Books',
-        BookList:BookList
+    const FruitList = await Fruit.find();
+    res.render('Fruit/list',{
+        title:'Fruit',
+        FruitList:FruitList
     })}
     catch(err){
         console.error(err);
-        res.render('Book/list',{
+        res.render('fruit/list',{
             error:'Error on the server'
         })
     }
@@ -29,14 +29,14 @@ try{
 /* Create Operation --> Get route for displaying me the Add Page */
 router.get('/add',async(req,res,next)=>{
     try{
-        res.render('Book/add',{
-            title: 'Add Book'
+        res.render('Fruit/add',{
+            title: 'Add Fruit'
         })
     }
     catch(err)
     {
         console.error(err);
-        res.render('Book/list',{
+        res.render('fruit/list',{
             error:'Error on the server'
         })
     }
@@ -44,21 +44,21 @@ router.get('/add',async(req,res,next)=>{
 /* Create Operation --> Post route for processing the Add Page */
 router.post('/add',async(req,res,next)=>{
     try{
-        let newBook = Book({
-            "Name":req.body.Name,
-            "Author":req.body.Author,
-            "Published":req.body.Published,
-            "Description":req.body.Description,
-            "Price":req.body.Price
+        let newFruit = Fruit({
+            "Type_of_Fruit":req.body.Type_of_Fruit,
+            "Seeds":req.body.Seeds,
+            "Organic":req.body.Organic,
+            "Pounds":req.body.Pounds,
+            "Cost":req.body.Cost
         });
-        Book.create(newBook).then(()=>{
-            res.redirect('/bookslist');
+        Fruit.create(newFruit).then(()=>{
+            res.redirect('/fruitslist');
         })
     }
     catch(err)
     {
         console.error(err);
-        res.render('Book/list',{
+        res.render('fruit/list',{
             error:'Error on the server'
         })
     }
@@ -67,11 +67,11 @@ router.post('/add',async(req,res,next)=>{
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
-        const bookToEdit= await Book.findById(id);
-        res.render('Book/edit',
+        const fruitToEdit= await Fruit.findById(id);
+        res.render('fruit/edit',
             {
-                title:'Edit Book',
-                Book:bookToEdit
+                title:'Edit Fruit',
+                Fruit:fruitToEdit
             }
         )
     }
@@ -85,21 +85,21 @@ router.get('/edit/:id',async(req,res,next)=>{
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        let updatedBook = Book({
+        let updatedFruit= Fruit({
             "_id":id,
-            "Name":req.body.Name,
-            "Author":req.body.Author,
-            "Published":req.body.Published,
-            "Description":req.body.Description,
-            "Price":req.body.Price
+            "Type_of_Fruit":req.body.Type_of_Fruit,
+            "Seeds":req.body.Seeds,
+            "Organic":req.body.Organic,
+            "Pounds":req.body.Pounds,
+            "Cost":req.body.Cost
         });
-        Book.findByIdAndUpdate(id,updatedBook).then(()=>{
-            res.redirect('/bookslist')
+        Fruit.findByIdAndUpdate(id,updatedFruit).then(()=>{
+            res.redirect('/fruitslist')
         })
     }
     catch(err){
         console.error(err);
-        res.render('Book/list',{
+        res.render('fruit/list',{
             error:'Error on the server'
         })
     }
@@ -108,15 +108,16 @@ router.post('/edit/:id',async(req,res,next)=>{
 router.get('/delete/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
-        Book.deleteOne({_id:id}).then(()=>{
-            res.redirect('/bookslist')
+        Fruit.deleteOne({_id:id}).then(()=>{
+            res.redirect('/fruitlist')
         })
     }
     catch(error){
         console.error(err);
-        res.render('Book/list',{
+        res.render('fruit/list',{
             error:'Error on the server'
         })
     }
 });
+
 module.exports = router;
