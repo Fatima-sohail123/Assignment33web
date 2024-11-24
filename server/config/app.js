@@ -20,13 +20,16 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Define routes
-let indexRouter = require('../views/Auth/index');
+let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
-let fruitRouter = require('../routes/Fruit');
+let fruitRouter = require('../routes/fruit');
 
 // MongoDB connection
 let DB = require('./db');
-mongoose.connect(DB.URI);
+mongoose.connect(DB.URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.error("MongoDB connection error: ", err));
+
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error'));
 mongoDB.once('open', () => {
@@ -41,6 +44,7 @@ app.use(
     secret: 'SomeSecret',
     saveUninitialized: false,
     resave: false,
+    store: require('connect-mongo').create({ mongoUrl: DB.URI }) // Use MongoDB for session storage
   })
 );
 
@@ -49,9 +53,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Set the view engine and views folder
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
+// Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
