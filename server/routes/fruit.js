@@ -4,14 +4,7 @@ let mongoose = require('mongoose');
 // telling my router that I have this model
 let fruit = require('../model/Fruit.js');
 const Fruit = require('../model/Fruit.js');
-let fruitController = require('../controllers/fruit.js')
-/* Get route for the book list - Read Operation */
-/*
-GET,
-Post,
-Put --> Edit/Update
-*/
-/* Read Operation --> Get route for displaying the books list */
+let FruitController = require("../controllers/fruit.js")
 router.get('/',async(req,res,next)=>{
 try{
     const FruitList = await Fruit.find();
