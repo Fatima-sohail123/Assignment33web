@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 // telling my router that I have this model
-let Fruit = require('../model/Fruit.js');
-const fruit = require('../model/Fruit.js');
+let fruit = require('../model/Fruit.js');
+const Fruit = require('../model/Fruit.js');
 let fruitController = require('../controllers/fruit.js')
 /* Get route for the book list - Read Operation */
 /*
@@ -16,12 +16,13 @@ router.get('/',async(req,res,next)=>{
 try{
     const FruitList = await Fruit.find();
     res.render('Fruit/list',{
-        title:'Fruit',
+        title:'Fruit information',
+        displayName: req.user ? req.user.displayName: "",
         FruitList:FruitList
     })}
     catch(err){
         console.error(err);
-        res.render('fruit/list',{
+        res.render('Fruit/list',{
             error:'Error on the server'
         })
     }
@@ -30,13 +31,14 @@ try{
 router.get('/add',async(req,res,next)=>{
     try{
         res.render('Fruit/add',{
-            title: 'Add Fruit'
+            title: 'Add Fruit',
+            displayName: req.user ? req.user.displayName: ""
         })
     }
     catch(err)
     {
         console.error(err);
-        res.render('fruit/list',{
+        res.render('Fruit/list',{
             error:'Error on the server'
         })
     }
@@ -58,7 +60,7 @@ router.post('/add',async(req,res,next)=>{
     catch(err)
     {
         console.error(err);
-        res.render('fruit/list',{
+        res.render('Fruit/list',{
             error:'Error on the server'
         })
     }
@@ -71,6 +73,7 @@ router.get('/edit/:id',async(req,res,next)=>{
         res.render('fruit/edit',
             {
                 title:'Edit Fruit',
+                displayName: req.user ? req.user.displayName: "",
                 Fruit:fruitToEdit
             }
         )
