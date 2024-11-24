@@ -47,7 +47,7 @@ router.get('/add',async(req,res,next)=>{
 router.post('/add',async(req,res,next)=>{
     try{
         let newFruit = Fruit({
-            "Type_of_Fruit":req.body.Type_of_Fruit,
+            "Type_of_Fruit_or_Vegetable":req.body.Type_of_Fruit_or_Vegetable,
             "Seeds":req.body.Seeds,
             "Organic":req.body.Organic,
             "Pounds":req.body.Pounds,
@@ -90,7 +90,7 @@ router.post('/edit/:id',async(req,res,next)=>{
         let id=req.params.id;
         let updatedFruit= Fruit({
             "_id":id,
-            "Type_of_Fruit":req.body.Type_of_Fruit,
+            "Type_of_Fruit_or_Vegetable":req.body.Type_of_Fruit_or_Vegetable,
             "Seeds":req.body.Seeds,
             "Organic":req.body.Organic,
             "Pounds":req.body.Pounds,

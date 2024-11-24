@@ -15,14 +15,14 @@
                 <thead>
                     <tr class="d-flex">
                         <% if (type of displayName === 'string' && displayName) { %>
-                            <th class="text-center col-2">Type_of_Fruit</th>
+                            <th class="text-center col-2">Type_of_Fruit_or_Vegetable</th>
                             <th class="text-center col-2">Seeds</th>
                             <th class="text-center col-1">Organic</th>
                             <th class="col-4">Pounds</th>
                             <th class="text-center col-1">Cost</th>
                             <th class="text-center col-1">Actions</th>
                         <% } else { %>
-                            <th class="text-center col-2">Type_of_Fruit</th>
+                            <th class="text-center col-2">Type_of_Fruit_or_Vegetable</th>
                             <th class="text-center col-2">Seeds</th>
                             <th class="text-center col-1">Organic</th>
                             <th class="col-4">Pounds</th>
@@ -33,7 +33,7 @@
                 <tbody>
                     <% for (let count = 0; count < FruitList.length; count++) { %>
                         <tr class="d-flex">
-                            <td class="text-center col-2"><%= FruitList[count].Type_of_Fruit %></td>
+                            <td class="text-center col-2"><%= FruitList[count].Type_of_Fruit_or_Vegetable%></td>
                             <td class="text-center col-2"><%= FruitList[count].Seeds %></td>
                             <td class="text-center col-1"><%= FruitList[count].Organic %></td>
                             <td class="col-4"><%= FruitList[count].Pounds %></td>
