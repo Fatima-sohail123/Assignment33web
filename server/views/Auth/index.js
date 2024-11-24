@@ -1,20 +1,20 @@
 var express = require('express');
 var router = express.Router();
 const passport=require('passport');
-const DB = require('../config/db');
-let userModel = require('../model/User');
+const DB = require('../../config/db');
+let userModel = require('../../model/User');
 let User = userModel.User;
 
 
 /* GET index page. */
 router.get('/', function(req, res, next) {
-  res.render('server/index', { 
-    title: 'The Fruit Farm',
+  res.render('pages/index', { 
+    title: 'The Happy Farm',
     displayName: req.user ? req.user.displayName: '' });
 });
 /* GET home page. */
 router.get('/home', function(req, res, next) {
-  res.render('server/index', { title: 'The Fruit Farm',
+  res.render('pages/index', { title: 'The Happy Farm',
     displayName: req.user ? req.user.displayName: '' 
    });
 });

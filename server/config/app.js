@@ -20,7 +20,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // Define routes
-let indexRouter = require('../routes/index');
+let indexRouter = require('../views/Auth/index');
 let usersRouter = require('../routes/users');
 let fruitRouter = require('../routes/Fruit');
 
