@@ -1,55 +1,49 @@
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
+
+// Create the User schema
 let User = mongoose.Schema({
-    username:
-    {
-        type:String,
-        default:"",
-        trim:true, 
+    username: {
+        type: String,
+        default: "",
+        trim: true,
         required: "Username is required"
     },
-    /*password:
-    {
-        type:String,
-        default:"",
-        trim=true,
-        required: "Password is required"
-    },
-    */
-   displayName:
-   {
-        type:String,
-        default:"",
-        trim:true,
+    displayName: {
+        type: String,
+        default: "",
+        trim: true,
         required: "DisplayName is required"
-   },
-   email:
-   {
-        type:String,
-        default:"",
-        trim:true,
-        required: "email is required"
-   },
-   created:
-   {
-        type:Date,
-        default: Date.now
-   },
-   update:
-   {
+    },
+    email: {
+        type: String,
+        default: "",
+        trim: true,
+        required: "Email is required",
+        match: [/.+\@.+\..+/i, 'Invalid email address'] // Basic email validation
+    },
+    created: {
         type: Date,
         default: Date.now
-   }
-
-
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
 },
 {
     collection: "user"
-}
-)
+});
 
-//configure options for user model
+// Set options for passport-local-mongoose plugin
+let options = {
+    errorMessages: {
+        MissingPasswordError: 'Wrong or Missing Password'
+    }
+};
 
-let options = ({MissingPasswordError:'Wrong/Missing Password'});
+// Apply the passport-local-mongoose plugin for password hashing
 User.plugin(passportLocalMongoose, options);
-module.exports.User=mongoose.model('User',User);
+
+// Export the User model
+module.exports.User = mongoose.model('User', User);

@@ -1,5 +1,6 @@
-<%- include ../Partials/header.ejs%>
-<%- include ../Partials/main_nav.ejs%>
+<%- include ../Partials/header.ejs %>
+<%- include ../Partials/main_nav.ejs %>
+
 <!-- Content for Add Page -->
 <div class="container">
     <div class="row">
@@ -8,33 +9,29 @@
             <form class="form" method="POST">
                 <div class="form-group">
                     <label for="Type_of_Fruit">Type of Fruit</label>
-                    <input type="text" class="form-control" id="Type_of_Fruit_or_Vegetable" placeholder="Enter the Type of Fruit or Vegetable" name="Type_of_Fruit_or_Vegetable" required>
+                    <input type="text" class="form-control" id="Type_of_Fruit" placeholder="Enter the Type of Fruit or Vegetable" name="Type_of_Fruit_or_Vegetable" required>
                 </div>
                 <div class="form-group">
                     <label for="Seeds">Seeds</label>
-                    <input type="text" class="form-control" id="Seeds" placeholder="Does the Fruit you chose have seeds?" name="Seeds" required>
+                    <input type="text" class="form-control" id="Seeds" placeholder="E.g., Yes or No" name="Seeds" required>
                 </div>
                 <div class="form-group">
                     <label for="Organic">Organic</label>
-                    <input type="text" class="form-control" id="Organic" placeholder="Is the fruit you chose Organic?" name="Organic" required>
+                    <input type="text" class="form-control" id="Organic" placeholder="E.g., Yes or No" name="Organic" required>
                 </div>
                 <div class="form-group">
                     <label for="Pounds">Pounds</label>
-                    <textarea class="form-control" id="Pounds" placeholder="Enter the amount of pounds of fruit you want" name="Pounds" required></textarea>
+                    <input type="number" class="form-control" id="Pounds" placeholder="Enter the pounds of fruit you want" name="Pounds" required>
                 </div>
                 <div class="form-group">
                     <label for="Cost">Cost</label>
-                    <input type="number" class="form-control" id="Cost" placeholder="The cost of the fruit" name="Cost" required>
+                    <input type="number" class="form-control" id="Cost" placeholder="Enter the cost of the fruit" name="Cost" required>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit
-                    <i class="fas fa-edit"></i>
-                </button>
-                <a href="/fruitlist" class="btn btn-warning">Cancel
-                    <i class="fas fa-undo"></i>
-                </a>   
+                <button class="btn btn-primary" type="submit">Submit <i class="fas fa-edit"></i></button>
+                <a href="/fruitslist" class="btn btn-warning">Cancel <i class="fas fa-undo"></i></a>
             </form>
         </div>
     </div>
 </div>
 
-<%- include ../Partials/footer.ejs%>
+<%- include ../Partials/footer.ejs %>

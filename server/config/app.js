@@ -44,7 +44,6 @@ app.use(
     secret: 'SomeSecret',
     saveUninitialized: false,
     resave: false,
-    store: require('connect-mongo').create({ mongoUrl: DB.URI }) // Use MongoDB for session storage
   })
 );
 

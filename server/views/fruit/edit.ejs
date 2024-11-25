@@ -1,38 +1,37 @@
-<%- include ../Partials/header.ejs%>
-<%- include ../Partials/main_nav.ejs%>
-<!--Content for the edit Operation-->
-<div class="container"></div>
+<%- include ../Partials/header.ejs %>
+<%- include ../Partials/main_nav.ejs %>
+
+<!-- Content for the edit Operation -->
+<div class="container">
     <div class="row">
         <div class="offset-md-3 col-md-6">
             <h1><%= title %></h1>
             <form class="form" method="POST">
-                <form class="form" method="POST">
                 <div class="form-group">
                     <label for="Type of FruitTextField">Type of Fruit</label>
-                    <input type="text" class="form-control" id="Type of FruitTextField" placeholder="Enter the Type of Fruit" name="Type_of_Fruit" required>
+                    <input type="text" class="form-control" id="Type of FruitTextField" placeholder="Enter the type of fruit" name="Type_of_Fruit_or_Vegetable" value="<%= fruit.Type_of_Fruit_or_Vegetable %>" required>
                 </div>
                 <div class="form-group">
                     <label for="SeedsTextField">Seeds</label>
-                    <input type="text" class="form-control" id="SeedsTextField" placeholder="Does the Fruit you chose have seeds" name="Seeds" required>
+                    <input type="text" class="form-control" id="SeedsTextField" placeholder="E.g., Yes or No" name="Seeds" value="<%= fruit.Seeds %>" required>
                 </div>
                 <div class="form-group">
                     <label for="OrganicTextField">Organic</label>
-                    <input type="text" class="form-control" id="OrganicTextField" placeholder="Is the fruit you chose Organic" name="Organic" required>
+                    <input type="text" class="form-control" id="OrganicTextField" placeholder="E.g., Yes or No" name="Organic" value="<%= fruit.Organic %>" required>
                 </div>
                 <div class="form-group">
                     <label for="PoundsTextArea">Pounds</label>
-                    <textarea type="text" class="form-control" id="PoundsTextArea"  placeholder="Enter the amount of pounds of fruit you want" name="Pounds" required></textarea>
+                    <textarea class="form-control" id="PoundsTextArea" placeholder="Enter the pounds" name="Pounds" required><%= fruit.Pounds %></textarea>
                 </div>
                 <div class="form-group">
                     <label for="CostTextField">Cost</label>
-                    <input type="text" class="form-control" id="CostTextField" placeholder="The cost of the fruit" name="Cost" required>
+                    <input type="text" class="form-control" id="CostTextField" placeholder="Enter the cost" name="Cost" value="<%= fruit.Cost %>" required>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit
-                <i class="fas fa-edit"></i></button>  
-                <button class="btn btn-warning" type="submit">Cancel
-                    <i class="fas fa-undo"></i></button>    
+                <button class="btn btn-primary" type="submit">Submit <i class="fas fa-edit"></i></button>
+                <a href="/fruitslist" class="btn btn-warning">Cancel <i class="fas fa-undo"></i></a>
             </form>
         </div>
     </div>
 </div>
-<%- include ../Partials/footer.ejs%>
+
+<%- include ../Partials/footer.ejs %>

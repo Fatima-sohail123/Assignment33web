@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 // GET home page
 router.get('/home', function(req, res, next) {
-  res.render('pages/index', { 
+  res.render('pages/home', { 
     title: 'The Happy Farm', 
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -23,23 +23,23 @@ router.get('/home', function(req, res, next) {
 
 // GET About Us page
 router.get('/aboutus', function(req, res, next) {
-  res.render('fruit/about', { 
+  res.render('pages/about', { 
     title: 'About Us',
     displayName: req.user ? req.user.displayName : '' 
   });
 });
 
 // GET Product page
-router.get('/product', function(req, res, next) {
-  res.render('fruit/products', { 
-    title: 'Product', 
+router.get('/fruit', function(req, res, next) {
+  res.render('pages/fruit', { 
+    title: 'Fruit', 
     displayName: req.user ? req.user.displayName : '' 
   });
 });
 
 // GET Services page
 router.get('/service', function(req, res, next) {
-  res.render('fruit/services', { 
+  res.render('pages/services', { 
     title: 'Service',
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -47,7 +47,7 @@ router.get('/service', function(req, res, next) {
 
 // GET Contact Us page
 router.get('/contactus', function(req, res, next) {
-  res.render('fruit/contact', { 
+  res.render('pages/contact', { 
     title: 'Contact Us',
     displayName: req.user ? req.user.displayName : '' 
   });
