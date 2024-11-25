@@ -22,14 +22,11 @@ passport.deserializeUser(User.deserializeUser());
 // Define routes
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
-let fruitRouter = require('../routes/fruit');
+let fruitRouter = require('../routes/Fruit');
 
 // MongoDB connection
 let DB = require('./db');
-mongoose.connect(DB.URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.error("MongoDB connection error: ", err));
-
+mongoose.connect(DB.URI);
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error'));
 mongoDB.once('open', () => {

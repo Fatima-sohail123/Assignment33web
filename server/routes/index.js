@@ -7,7 +7,7 @@ let User = userModel.User;
 
 // GET index page
 router.get('/', function(req, res, next) {
-  res.render('pages/index', { 
+  res.render('Pages/index', { 
     title: 'The Happy Farm',
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 // GET home page
 router.get('/home', function(req, res, next) {
-  res.render('pages/home', { 
+  res.render('Pages/home', { 
     title: 'The Happy Farm', 
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -23,15 +23,15 @@ router.get('/home', function(req, res, next) {
 
 // GET About Us page
 router.get('/aboutus', function(req, res, next) {
-  res.render('pages/about', { 
+  res.render('Pages/about', { 
     title: 'About Us',
     displayName: req.user ? req.user.displayName : '' 
   });
 });
 
-// GET Product page
+// GET Fruit page
 router.get('/fruit', function(req, res, next) {
-  res.render('pages/fruit', { 
+  res.render('fruit/fruit', { 
     title: 'Fruit', 
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -39,7 +39,7 @@ router.get('/fruit', function(req, res, next) {
 
 // GET Services page
 router.get('/service', function(req, res, next) {
-  res.render('pages/services', { 
+  res.render('Pages/services', { 
     title: 'Service',
     displayName: req.user ? req.user.displayName : '' 
   });
@@ -47,7 +47,7 @@ router.get('/service', function(req, res, next) {
 
 // GET Contact Us page
 router.get('/contactus', function(req, res, next) {
-  res.render('pages/contact', { 
+  res.render('Pages/contact', { 
     title: 'Contact Us',
     displayName: req.user ? req.user.displayName : '' 
   });

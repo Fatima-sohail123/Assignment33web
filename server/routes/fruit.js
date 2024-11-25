@@ -1,109 +1,106 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Fruit = require('../model/Fruit.js');
 
-// List All Fruits
+// Read operation - GET: Display list of fruits
 router.get('/', async (req, res, next) => {
     try {
         const fruitList = await Fruit.find();
-        res.render('fruit/list', {
-            title: 'Fruit Information',
-            displayName: req.user ? req.user.displayName : "",
-            FruitList: FruitList // Ensure variable names match
+        res.render('Fruit/list', {
+            title: 'Fruit Tracker',
+            displayName: req.user ? req.user.displayName : '',
+            FruitList: fruitList // Matches the variable name in view
         });
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error fetching fruits', error: err });
+        res.render('Fruit/list', {
+            error: 'Error on Server'
+        });
     }
 });
 
-// Display Add Page
+// Create operation - GET: Display Add Page
 router.get('/add', async (req, res, next) => {
     try {
-        res.render('fruit/add', {
-            title: 'Add Fruit',
-            displayName: req.user ? req.user.displayName : ""
+        res.render('Fruit/add', {
+            title: 'Add to Fruit Tracker',
+            displayName: req.user ? req.user.displayName : ''
         });
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error displaying add page', error: err });
+        res.render('Fruit/list', {
+            error: 'Error on Server'
+        });
     }
 });
 
-// Process Add Page
+// Create operation - POST: Process Add Page
 router.post('/add', async (req, res, next) => {
     try {
-        const newFruit = new Fruit({
-            Type_of_Fruit_or_Vegetable: req.body.Type_of_Fruit_or_Vegetable,
-            Seeds: req.body.Seeds,
-            Organic: req.body.Organic,
-            Pounds: req.body.Pounds,
-            Cost: req.body.Cost
+        let newFruit = new Fruit({
+            "Type_of_Fruit_or_Vegetable": req.body.Type_of_Fruit_or_Vegetable,
+            "Seeds": req.body.Seeds,
+            "Organic": req.body.Organic,
+            "Pounds": req.body.Pounds,
+            "Cost": req.body.Cost
         });
-        await newFruit.save();
+        await Fruit.create(newFruit);
         res.redirect('/fruitslist');
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error adding fruit', error: err });
+        res.render('Fruit/list', {
+            error: 'Error on Server'
+        });
     }
 });
 
-// Display Edit Page
+// Update operation - GET: Display Edit Page
 router.get('/edit/:id', async (req, res, next) => {
     try {
-        const fruitToEdit = await Fruit.findById(req.params.id);
-        res.render('fruit/edit', {
-            title: 'Edit Fruit',
-            displayName: req.user ? req.user.displayName : "",
+        const id = req.params.id;
+        const fruitToEdit = await Fruit.findById(id);
+        res.render('Fruit/edit', {
+            title: 'Edit Fruit Information',
+            displayName: req.user ? req.user.displayName : '',
             Fruit: fruitToEdit
         });
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error fetching fruit for edit', error: err });
+        next(err); // Pass the error to the error handler
     }
 });
 
-// Process Edit Page
+// Update operation - POST: Process Edit Page
 router.post('/edit/:id', async (req, res, next) => {
     try {
-        await Fruit.findByIdAndUpdate(req.params.id, {
-            Type_of_Fruit_or_Vegetable: req.body.Type_of_Fruit_or_Vegetable,
-            Seeds: req.body.Seeds,
-            Organic: req.body.Organic,
-            Pounds: req.body.Pounds,
-            Cost: req.body.Cost
+        let id = req.params.id;
+        let updatedFruit = new Fruit({
+            "_id": id,
+            "Type_of_Fruit_or_Vegetable": req.body.Type_of_Fruit_or_Vegetable,
+            "Seeds": req.body.Seeds,
+            "Organic": req.body.Organic,
+            "Pounds": req.body.Pounds,
+            "Cost": req.body.Cost
         });
+        await Fruit.findByIdAndUpdate(id, updatedFruit);
         res.redirect('/fruitslist');
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error updating fruit', error: err });
+        next(err); // Pass the error to the error handler
     }
 });
 
-// Delete Fruit
+// Delete operation - GET: Perform Delete Operation
 router.get('/delete/:id', async (req, res, next) => {
     try {
-        await Fruit.findByIdAndDelete(req.params.id);
+        let id = req.params.id;
+        await Fruit.deleteOne({ _id: id });
         res.redirect('/fruitslist');
     } catch (err) {
         console.error(err);
-        res.render('error', { message: 'Error deleting fruit', error: err });
-    }
-});
-
-// Display Fruit List
-router.get('/fruitslist', async (req, res) => {
-    try {
-        const fruitList = await Fruit.find();
-        res.render('fruit/products', {
-            title: 'Fruit Information',
-            displayName: req.user ? req.user.displayName : "",
-            fruitList: fruitList
+        res.render('Fruit/list', {
+            error: 'Error on Server'
         });
-    } catch (err) {
-        console.error(err);
-        res.render('error', { message: 'Error fetching fruit list', error: err });
     }
 });
 

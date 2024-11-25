@@ -1,5 +1,3 @@
-//const { Collection, default: mongoose } = require("mongoose");
-
 const mongoose = require("mongoose");
 
 let fruitModel = mongoose.Schema({
@@ -10,6 +8,6 @@ let fruitModel = mongoose.Schema({
     Cost: Number
 },
 {
-    collection:"Fruit_Farm"
+    collection: "Fruit_Farm"
 });
-module.exports =mongoose.model('Fruit',fruitModel);
+module.exports = mongoose.model('fruit', fruitModel);
